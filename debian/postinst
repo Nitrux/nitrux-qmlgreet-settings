@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+#############################################################################################################################################################################
+#   The license used for this file and its contents is: BSD-3-Clause                                                                                                        #
+#                                                                                                                                                                           #
+#   Copyright <2023-2024> <Uri Herrera <uri_herrera@nxos.org>>                                                                                                              #
+#                                                                                                                                                                           #
+#   Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:                          #
+#                                                                                                                                                                           #
+#    1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.                                        #
+#                                                                                                                                                                           #
+#    2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer                                      #
+#       in the documentation and/or other materials provided with the distribution.                                                                                         #
+#                                                                                                                                                                           #
+#    3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software                    #
+#       without specific prior written permission.                                                                                                                          #
+#                                                                                                                                                                           #
+#    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,                      #
+#    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS                  #
+#    BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE                 #
+#    GOODS OR SERVICES; LOSS OF USE, DATA,   OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,                      #
+#    STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.   #
+#############################################################################################################################################################################
+
+
+# -- Exit on errors.
+
+set -eu
+
+
+# -- Add user for greetd (which is missing for some reason!).
+
+GREETD_USER="_greetd"
+GREETD_GROUP="_greetd"
+GREETD_HOME="/var/lib/greetd"
+
+if ! getent group "$GREETD_GROUP" >/dev/null 2>&1; then
+    echo "Group '$GREETD_GROUP' not found. Creating..."
+    groupadd --system "$GREETD_GROUP"
+else
+    echo "Group '$GREETD_GROUP' already exists."
+fi
+
+if ! id -u "$GREETD_USER" >/dev/null 2>&1; then
+    echo "User '$GREETD_USER' not found. Creating..."
+    useradd --system \
+            --gid "$GREETD_GROUP" \
+            --home-dir "$GREETD_HOME" \
+            --create-home \
+            --shell /bin/false \
+            --comment "greetd daemon user" \
+            "$GREETD_USER"
+else
+    echo "User '$GREETD_USER' already exists."
+fi
+
+
+# -- Configure greetd to use Hyprland to start the graphical greeter.
+
+CONFIG_FILE="/etc/greetd/config.toml"
+
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo "$CONFIG_FILE not found."
+    exit 1
+fi
+
+sed -i '/^\[default_session\]/,/^\[/ s|^\( *command = \).*|\1"greetd-hyprland --config /etc/greetd/hyprland.conf"\n|' "$CONFIG_FILE"

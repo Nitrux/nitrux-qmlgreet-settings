@@ -1,0 +1,25 @@
+#!/sbin/openrc-run
+
+description="Starts the greetd display manager"
+command="/usr/sbin/greetd"
+supervisor=supervise-daemon
+
+depend() {
+	provide greetd
+	need elogind dbus
+	after localmount
+	use plymouth
+}
+
+start_pre() {
+	if ! getent passwd _greetd >/dev/null; then
+		eerror "User '_greetd' does not exist. Please create it first."
+		return 1
+	fi
+
+	checkpath -d -m 0755 -o _greetd:_greetd /run/greetd
+
+	if command -v plymouth >/dev/null 2>&1 && plymouth --ping; then
+		plymouth quit
+	fi
+}
