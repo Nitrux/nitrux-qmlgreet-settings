@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright 2025-2026 <Nitrux Latinoamericana S.C. <hello@nxos.org>>
+
+
+# -- Exit on errors.
+
+set -eu
+
+
+# -- Environment variables.
+
+# -- By default, greetd does not set environment variables such as XDG_SESSION_TYPE and XDG_CURRENT_DESKTOP, unless the greeter sets them based on the session you choose 
+# -- (for example, TUI will set the session type based on the location of the chosen session file).
+
+export XDG_SESSION_DESKTOP=Hyprland
+export SDL_VIDEODRIVER=wayland
+
+
+# -- Start Hyprland instance to launch greeter.
+
+exec dbus-run-session Hyprland "$@" > /dev/null 2>&1
