@@ -1,3 +1,11 @@
+nitrux-qmlgreet-settings (0.0.4)  nitrux; urgency=medium
+
+  * Update greetd-hyprland to use start-hyprland instead of launching it directly.
+  * Ensure that qmlgreet is launched fullscreen.
+  * Move the envrionment variables from greetd-hyprland to hyprland.conf.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 30 Jan 2026 06:41:00 -0500
+
 nitrux-qmlgreet-settings (0.0.3)  nitrux; urgency=medium
 
   * Restore greetd-hyprland.
