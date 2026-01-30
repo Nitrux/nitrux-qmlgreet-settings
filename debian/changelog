@@ -1,3 +1,9 @@
+nitrux-qmlgreet-settings (0.0.5)  nitrux; urgency=medium
+
+  * Update greetd-hyprland to use start-hyprland with dbus-run-session.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 30 Jan 2026 16:27:00 -0500
+
 nitrux-qmlgreet-settings (0.0.4)  nitrux; urgency=medium
 
   * Update greetd-hyprland to use start-hyprland instead of launching it directly.

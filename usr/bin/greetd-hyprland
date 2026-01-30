@@ -11,4 +11,4 @@ set -eu
 
 # -- Start Hyprland instance to launch greeter.
 
-exec start-hyprland -- "$@" > /dev/null 2>&1
+exec dbus-run-session start-hyprland -- "$@" > /dev/null 2>&1
