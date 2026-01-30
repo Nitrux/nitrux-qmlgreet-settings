@@ -1,3 +1,9 @@
+nitrux-qmlgreet-settings (0.0.2)  nitrux; urgency=medium
+
+  * Fix typo in hyprland.conf.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Fri, 30 Jan 2026 01:33:00 -0500
+
 nitrux-qmlgreet-settings (0.0.1)  nitrux; urgency=medium
 
   * Create package.
