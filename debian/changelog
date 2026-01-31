@@ -1,3 +1,10 @@
+nitrux-qmlgreet-settings (0.0.6)  nitrux; urgency=medium
+
+  * Update hyprland.conf.
+  * Add hyprpaper.conf.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 31 Jan 2026 00:40:00 -0500
+
 nitrux-qmlgreet-settings (0.0.5)  nitrux; urgency=medium
 
   * Update greetd-hyprland to use start-hyprland with dbus-run-session.
