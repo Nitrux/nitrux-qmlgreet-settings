@@ -58,10 +58,22 @@ fi
 # -- Configure greetd to use Hyprland to start the graphical greeter.
 
 CONFIG_FILE="/etc/greetd/config.toml"
+SYSTEM_HYPR_CONFIG="/etc/greetd/hyprland.lua"
+GREETD_HYPR_DIR="$GREETD_HOME/.config/hypr"
+GREETD_HYPR_CONFIG="$GREETD_HYPR_DIR/hyprland.lua"
 
 if [ ! -f "$CONFIG_FILE" ]; then
     echo "$CONFIG_FILE not found."
     exit 1
 fi
 
-sed -i '/^\[default_session\]/,/^\[/ s|^\( *command = \).*|\1"greetd-hyprland --config /etc/greetd/hyprland.conf"\n|' "$CONFIG_FILE"
+if [ ! -f "$SYSTEM_HYPR_CONFIG" ]; then
+    echo "$SYSTEM_HYPR_CONFIG not found."
+    exit 1
+fi
+
+mkdir -p "$GREETD_HYPR_DIR"
+cp -f "$SYSTEM_HYPR_CONFIG" "$GREETD_HYPR_CONFIG"
+chown -R "$GREETD_USER:$GREETD_GROUP" "$GREETD_HOME/.config"
+
+sed -i '/^\[default_session\]/,/^\[/ s|^\( *command = \).*|\1"greetd-hyprland --config /var/lib/greetd/.config/hypr/hyprland.lua"\n|' "$CONFIG_FILE"
