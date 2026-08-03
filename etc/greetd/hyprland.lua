@@ -18,7 +18,7 @@ hl.monitor({
 -------------------
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("brightnessctl -s set 48000 & hyprpaper --config /etc/greetd/hyprpaper.conf & hyprscreend & hyprextscreend")
+    hl.exec_cmd("brightnessctl -s set 48000 & hyprpaper --config /etc/greetd/hyprpaper.conf & hyprscreend")
     hl.exec_cmd("qmlgreet; hyprctl dispatch exit")
 end)
 

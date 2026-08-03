@@ -1,3 +1,9 @@
+nitrux-qmlgreet-settings (0.0.9)  nitrux; urgency=medium
+
+  * Update qmlgreet hyprland config to remove deprecated startup command.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Mon, 03 Aug 2026 17:08:00 -0600
+
 nitrux-qmlgreet-settings (0.0.8)  nitrux; urgency=medium
 
   * Migrate greetd Hyprland config from hyprland.conf to hyprland.lua.
