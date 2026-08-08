@@ -55,12 +55,21 @@ else
 fi
 
 
-# -- Configure greetd to use Hyprland to start the graphical greeter.
+# -- Configure greetd to use Hyprland to start the graphical greeter and make it use the same config as the user session.
 
 CONFIG_FILE="/etc/greetd/config.toml"
+
 SYSTEM_HYPR_CONFIG="/etc/greetd/hyprland.lua"
 GREETD_HYPR_DIR="$GREETD_HOME/.config/hypr"
 GREETD_HYPR_CONFIG="$GREETD_HYPR_DIR/hyprland.lua"
+
+SYSTEM_MAUI_CONFIG="/etc/skel/.config/Maui/MauiMan.conf"
+GREETD_MAUI_DIR="$GREETD_HOME/.config/Maui"
+GREETD_MAUI_CONFIG="$GREETD_MAUI_DIR/MauiMan.conf"
+
+SYSTEM_KDE_CONFIG="/etc/skel/.config/kdeglobals"
+GREETD_KDE_DIR="$GREETD_HOME/.config"
+GREETD_KDE_CONFIG="$GREETD_KDE_DIR/kdeglobals"
 
 if [ ! -f "$CONFIG_FILE" ]; then
     echo "$CONFIG_FILE not found."
@@ -72,8 +81,22 @@ if [ ! -f "$SYSTEM_HYPR_CONFIG" ]; then
     exit 1
 fi
 
-mkdir -p "$GREETD_HYPR_DIR"
+if [ ! -f "$SYSTEM_MAUI_CONFIG" ]; then
+    echo "$SYSTEM_MAUI_CONFIG not found."
+    exit 1
+fi
+
+if [ ! -f "$SYSTEM_KDE_CONFIG" ]; then
+    echo "$GREETD_KDE_CONFIG not found."
+    exit 1
+fi
+
+mkdir -p "$GREETD_HYPR_DIR" "$GREETD_MAUI_DIR"
+
 cp -f "$SYSTEM_HYPR_CONFIG" "$GREETD_HYPR_CONFIG"
+cp -f "$SYSTEM_MAUI_CONFIG" "$GREETD_MAUI_CONFIG"
+cp -f "$SYSTEM_KDE_CONFIG" "$GREETD_KDE_CONFIG"
+
 chown -R "$GREETD_USER:$GREETD_GROUP" "$GREETD_HOME/.config"
 
 sed -i '/^\[default_session\]/,/^\[/ s|^\( *command = \).*|\1"greetd-hyprland --config /var/lib/greetd/.config/hypr/hyprland.lua"\n|' "$CONFIG_FILE"

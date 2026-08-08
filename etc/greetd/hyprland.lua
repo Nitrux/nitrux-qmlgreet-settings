@@ -18,8 +18,8 @@ hl.monitor({
 -------------------
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("brightnessctl -s set 48000 & hyprpaper --config /etc/greetd/hyprpaper.conf & hyprscreend")
-    hl.exec_cmd("qmlgreet; hyprctl dispatch 'hl.dsp.exit()'")
+    hl.exec_cmd("autostart-kde-polkit & MauiManServer & brightnessctl -s set 48000 & nx-dynamic-ppd & hyprscreend")
+    hl.exec_cmd("hyprsunset --config /etc/greetd/hyprsunset.conf & hyprpaper --config /etc/greetd/hyprpaper.conf & hypridle --config /etc/greetd/hypridle.conf")
 end)
 
 
@@ -27,13 +27,21 @@ end)
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
 
+-- hl.env("AQ_DRM_DEVICES", "/dev/dri/card0")
+
+-- hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
+
+hl.env("GDK_BACKEND", "wayland,x11,*")
+hl.env("GTK_USE_PORTAL", "1")
+
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_THEME", "nitrux_snow_cursors")
 
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
-hl.env("QT_QUICK_CONTROLS_STYLE", "org.kde.breeze")
-hl.env("QICON_THEME", "Luv")
+hl.env("QT_QPA_PLATFORMTHEME", "kde")
+
+-- hl.env("SDL_VIDEODRIVER", "wayland")
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("XCURSOR_THEME", "nitrux_snow_cursors")

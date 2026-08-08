@@ -1,3 +1,9 @@
+nitrux-qmlgreet-settings (0.1.1)  nitrux; urgency=medium
+
+  * Update qmlgreet config to use make it use the same theming and config as the user session.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 08 Aug 2026 16:03:00 -0600
+
 nitrux-qmlgreet-settings (0.1.0)  nitrux; urgency=medium
 
   * Update qmlgreet hyprland config to use hyprland's current Lua dispatcher.
