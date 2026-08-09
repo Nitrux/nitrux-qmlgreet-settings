@@ -20,6 +20,7 @@ hl.monitor({
 hl.on("hyprland.start", function()
     hl.exec_cmd("autostart-kde-polkit & MauiManServer & brightnessctl -s set 48000 & nx-dynamic-ppd & hyprscreend")
     hl.exec_cmd("hyprsunset --config /etc/greetd/hyprsunset.conf & hyprpaper --config /etc/greetd/hyprpaper.conf & hypridle --config /etc/greetd/hypridle.conf")
+    hl.exec_cmd("qmlgreet; hyprctl dispatch 'hl.dsp.exit()'")
 end)
 
 
