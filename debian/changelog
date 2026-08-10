@@ -1,3 +1,9 @@
+nitrux-qmlgreet-settings (0.1.3)  nitrux; urgency=medium
+
+  * Fix hyprland configurationd.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Sun, 09 Aug 2026 18:35:00 -0600
+
 nitrux-qmlgreet-settings (0.1.2)  nitrux; urgency=medium
 
   * Fix hyprland configuration and restore missing autostart command.
