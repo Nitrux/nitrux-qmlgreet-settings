@@ -1,6 +1,12 @@
+nitrux-qmlgreet-settings (0.1.4)  nitrux; urgency=medium
+
+  * Update hypridle configuration.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 11 Aug 2026 18:20:00 -0600
+
 nitrux-qmlgreet-settings (0.1.3)  nitrux; urgency=medium
 
-  * Fix hyprland configurationd.
+  * Fix hyprland configuration.
 
  -- Uri Herrera <uri_herrera@nxos.org>  Sun, 09 Aug 2026 18:35:00 -0600
 
