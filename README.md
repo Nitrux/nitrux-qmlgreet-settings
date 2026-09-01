@@ -1,4 +1,5 @@
-# Greeter configuration
+# QMLGreet Configuration
+
 Hyprland configuration for QMLGreet.
 
 # Issues
